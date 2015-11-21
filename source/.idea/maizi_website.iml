@@ -14,7 +14,7 @@
     <content url="file://$MODULE_DIR$">
       <sourceFolder url="file://$MODULE_DIR$/maizi" isTestSource="false" />
     </content>
-    <orderEntry type="jdk" jdkName="Python 2.7.10 virtualenv at C:\Users\yopoing\Documents\Workspace\maizi_venv" jdkType="Python SDK" />
+    <orderEntry type="jdk" jdkName="Python 2.7.10 virtualenv at F:\MaiZi\peng_coding\maizi-stu-project\venv_maizi_stu" jdkType="Python SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
   </component>
   <component name="TemplatesService">

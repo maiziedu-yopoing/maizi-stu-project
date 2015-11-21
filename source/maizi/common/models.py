@@ -14,8 +14,8 @@ from django.conf import settings
 from django.contrib.auth.models import BaseUserManager, \
     AbstractBaseUser, PermissionsMixin
 
-class Ad(models.Model):
 
+class Ad(models.Model):
     '''
     首页广告
     '''
@@ -36,8 +36,8 @@ class Ad(models.Model):
     def __unicode__(self):
         return self.title
 
-class MyMessage(models.Model):
 
+class MyMessage(models.Model):
     '''
     我的消息
     '''
@@ -48,9 +48,9 @@ class MyMessage(models.Model):
         ('3', u'论坛讨论回复'),
     )
 
-    #发送方,为0表示系统用户
+    # 发送方,为0表示系统用户
     userA = models.IntegerField(u'用户A')
-    #接收方,为0就给所有用户发送消息
+    # 接收方,为0就给所有用户发送消息
     userB = models.IntegerField(u'用户B')
     action_type = models.CharField(u'类型', choices=action_types, max_length=1)
     action_id = models.IntegerField(u'动作id', blank=True, null=True)
@@ -66,13 +66,13 @@ class MyMessage(models.Model):
     def __unicode__(self):
         return str(self.id)
 
-class Links(models.Model):
 
+class Links(models.Model):
     '''
     友情链接
     '''
 
-    title =  models.CharField(u'标题', max_length=50)
+    title = models.CharField(u'标题', max_length=50)
     description = models.CharField(u'友情链接描述', max_length=200)
     image_url = models.ImageField(u'图片路径', upload_to='links/%Y/%m',
                                   null=True, blank=True)
@@ -87,8 +87,8 @@ class Links(models.Model):
     def __unicode__(self):
         return self.title
 
-class Keywords(models.Model):
 
+class Keywords(models.Model):
     '''
     关键词
     '''
@@ -103,13 +103,13 @@ class Keywords(models.Model):
     def __unicode__(self):
         return self.name
 
-class RecommendKeywords(models.Model):
 
+class RecommendKeywords(models.Model):
     '''
     推荐搜索关键词
     '''
 
-    name = models.CharField(u'推荐搜索关键词', max_length = 50)
+    name = models.CharField(u'推荐搜索关键词', max_length=50)
 
     class Meta:
         verbose_name = u'推荐搜索关键词'
@@ -119,8 +119,8 @@ class RecommendKeywords(models.Model):
     def __unicode__(self):
         return self.name
 
-class EmailVerifyRecord(models.Model):
 
+class EmailVerifyRecord(models.Model):
     '''
     邮箱验证记录
     '''
@@ -140,8 +140,8 @@ class EmailVerifyRecord(models.Model):
     def __unicode__(self):
         return self.code
 
-class RecommendedReading(models.Model):
 
+class RecommendedReading(models.Model):
     '''
     首页推荐文章
     '''
@@ -169,8 +169,8 @@ class RecommendedReading(models.Model):
     def __unicode__(self):
         return self.title
 
-class CareerCourse(models.Model):
 
+class CareerCourse(models.Model):
     '''
     职业课程
     '''
@@ -199,8 +199,8 @@ class CareerCourse(models.Model):
     def __unicode__(self):
         return self.name
 
-class Stage(models.Model):
 
+class Stage(models.Model):
     '''
     阶段
     '''
@@ -221,13 +221,13 @@ class Stage(models.Model):
     def __unicode__(self):
         return self.name
 
-class Course(models.Model):
 
+class Course(models.Model):
     '''
     课程
     '''
 
-    name = models.CharField(u'课程名称',max_length=50)
+    name = models.CharField(u'课程名称', max_length=50)
     image = models.ImageField(u'课程封面', upload_to='course/%Y/%m')
     description = models.TextField(u'课程描述')
     is_active = models.BooleanField(u'有效性', default=True)
@@ -236,10 +236,10 @@ class Course(models.Model):
     need_days_base = models.IntegerField(u'有基础学生完成天数', default=5)
     student_count = models.IntegerField(u'学习人数', default=0)
     favorite_count = models.IntegerField(u'收藏次数', default=0)
-    click_count = models.IntegerField(u'点击次数',default=0)
+    click_count = models.IntegerField(u'点击次数', default=0)
     is_novice = models.BooleanField(u'是否是新手课程', default=False)
     is_click = models.BooleanField(u'是否点击能进入课程', default=False)
-    index = models.IntegerField(u'课程顺序(从小到大)',default=999)
+    index = models.IntegerField(u'课程顺序(从小到大)', default=999)
     teacher = models.ForeignKey(settings.AUTH_USER_MODEL, verbose_name=u'老师')
     stages = models.ForeignKey(Stage, blank=True, null=True, verbose_name=u'阶段')
     search_keywords = models.ManyToManyField(Keywords, verbose_name=u'小课程搜索关键词')
@@ -254,8 +254,8 @@ class Course(models.Model):
     def __unicode__(self):
         return self.name
 
-class Lesson(models.Model):
 
+class Lesson(models.Model):
     '''
     视频章节
     '''
@@ -281,8 +281,8 @@ class Lesson(models.Model):
     def __unicode__(self):
         return self.name
 
-class LessonResource(models.Model):
 
+class LessonResource(models.Model):
     '''
     章节资源
     '''
@@ -291,6 +291,7 @@ class LessonResource(models.Model):
     download_url = models.FileField(u'下载地址', upload_to='lesson/%Y/%m')
     download_count = models.IntegerField(u'下载次数', default=0)
     lesson = models.ForeignKey(Lesson, verbose_name=u'章节')
+
     class Meta:
         verbose_name = u'章节资源'
         verbose_name_plural = verbose_name
@@ -299,8 +300,8 @@ class LessonResource(models.Model):
     def __unicode__(self):
         return self.name
 
-class CourseResource(models.Model):
 
+class CourseResource(models.Model):
     '''
     课程资源
     '''
@@ -309,6 +310,7 @@ class CourseResource(models.Model):
     download_url = models.FileField(u'下载地址', upload_to='course/%Y/%m')
     download_count = models.IntegerField(u'下载次数', default=0)
     course = models.ForeignKey(Course, verbose_name=u'课程')
+
     class Meta:
         verbose_name = u'课程资源'
         verbose_name_plural = verbose_name
@@ -317,8 +319,8 @@ class CourseResource(models.Model):
     def __unicode__(self):
         return self.name
 
-class UserProfileManager(BaseUserManager):
 
+class UserProfileManager(BaseUserManager):
     '''
     自定义用户管理器
     '''
@@ -331,7 +333,7 @@ class UserProfileManager(BaseUserManager):
         now = datetime.now()
         if not email:
             raise ValueError(u'Email必须填写')
-        user = self.model(username=username,email=email,
+        user = self.model(username=username, email=email,
                           is_staff=is_staff, is_active=True,
                           is_superuser=is_superuser, last_login=now,
                           date_joined=now, **extra_fields)
@@ -347,8 +349,8 @@ class UserProfileManager(BaseUserManager):
         return self._create_user(email, email, password, True, True,
                                  **extra_fields)
 
-class UserProfile(AbstractBaseUser,PermissionsMixin):
 
+class UserProfile(AbstractBaseUser, PermissionsMixin):
     '''
     继承AbstractUser，扩展用户信息
     '''
@@ -360,19 +362,22 @@ class UserProfile(AbstractBaseUser,PermissionsMixin):
     is_staff = models.BooleanField(u'职员状态', default=False, help_text='是否能够登录管理后台')
     is_active = models.BooleanField(u'是否激活', default=True, help_text='用户是否被激活，未激活则不能使用')
     date_joined = models.DateTimeField(u'创建日期', auto_now_add=True)
-    avatar_url = models.ImageField(upload_to='avatar/%Y/%m', default='avatar/default_big.png', max_length=200, blank=True, null=True, verbose_name=u'头像220x220')
-    avatar_middle_thumbnall = models.ImageField(upload_to='avatar/%Y/%m', default='avatar/default_middle.png', max_length=200, blank=True, null=True, verbose_name=u'头像104x104')
-    avatar_small_thumbnall = models.ImageField(upload_to='avatar/%Y/%m', default='avatar/default_small.png', max_length=200, blank=True, null=True, verbose_name=u'头像70x70')
+    avatar_url = models.ImageField(upload_to='avatar/%Y/%m', default='avatar/default_big.png', max_length=200,
+                                   blank=True, null=True, verbose_name=u'头像220x220')
+    avatar_middle_thumbnall = models.ImageField(upload_to='avatar/%Y/%m', default='avatar/default_middle.png',
+                                                max_length=200, blank=True, null=True, verbose_name=u'头像104x104')
+    avatar_small_thumbnall = models.ImageField(upload_to='avatar/%Y/%m', default='avatar/default_small.png',
+                                               max_length=200, blank=True, null=True, verbose_name=u'头像70x70')
     avatar_alt = models.CharField(u'头像ALT说明', max_length=100, blank=True, null=True)
     qq = models.CharField(u'QQ号码', max_length=20, blank=True, null=True)
     mobile = models.CharField(u'手机号码', max_length=11, blank=True, null=True, unique=True)
-    valid_email = models.SmallIntegerField(u'是否验证邮箱', default=0, choices=((0, u'否'),(1, u'是'),))
+    valid_email = models.SmallIntegerField(u'是否验证邮箱', default=0, choices=((0, u'否'), (1, u'是'),))
     company_name = models.CharField(u'公司名', max_length=150, blank=True, null=True)
     position = models.CharField(u'职位名', max_length=150, blank=True, null=True)
     description = models.TextField(u'个人介绍', blank=True, null=True)
     city = models.CharField(u'城市', max_length=30, null=True, blank=True)
     province = models.CharField(u'省份', max_length=30, null=True, blank=True)
-    index = models.IntegerField(u'排列顺序(从小到大)',default=999)
+    index = models.IntegerField(u'排列顺序(从小到大)', default=999)
     mylesson = models.ManyToManyField(Lesson, through=u'UserLearningLesson', verbose_name=u'我的学习章节')
     mystage = models.ManyToManyField(Stage, through=u'UserUnlockStage', verbose_name=u'我的解锁阶段')
     myfavorite = models.ManyToManyField(Course, through=u'MyFavorite', verbose_name=u'我的收藏')
@@ -406,21 +411,21 @@ class UserProfile(AbstractBaseUser,PermissionsMixin):
 
     # 是否是老师
     def is_teacher(self):
-        if self.groups.filter(name='老师').count() > 0 :
+        if self.groups.filter(name='老师').count() > 0:
             return True
         return False
 
     # 是否是学生
     def is_student(self):
-        if self.groups.filter(name='学生').count() > 0 :
+        if self.groups.filter(name='学生').count() > 0:
             return True
         return False
 
     def __unicode__(self):
         return self.username
 
-class MyCourse(models.Model):
 
+class MyCourse(models.Model):
     '''
     我的课程
     '''
@@ -441,7 +446,6 @@ class MyCourse(models.Model):
 
 
 class MyFavorite(models.Model):
-
     '''
     我的收藏
     '''
@@ -459,8 +463,8 @@ class MyFavorite(models.Model):
     def __unicode__(self):
         return str(self.id)
 
-class UserLearningLesson(models.Model):
 
+class UserLearningLesson(models.Model):
     '''
     用户学习章节记录(我的章节)
     '''
@@ -479,8 +483,8 @@ class UserLearningLesson(models.Model):
     def __unicode__(self):
         return str(self.id)
 
-class UserUnlockStage(models.Model):
 
+class UserUnlockStage(models.Model):
     '''
     用户解锁的具体阶段
     '''
@@ -498,8 +502,8 @@ class UserUnlockStage(models.Model):
     def __unicode__(self):
         return str(self.id)
 
-class Class(models.Model):
 
+class Class(models.Model):
     '''
     班级
     '''
@@ -508,9 +512,9 @@ class Class(models.Model):
     date_publish = models.DateTimeField(u'创建日期', auto_now_add=True)
     date_open = models.DateTimeField(u'开课日期')
     student_limit = models.IntegerField(u'学生上限', default=25)
-    current_student_count = models.IntegerField(u'当前报名数',default=0)
+    current_student_count = models.IntegerField(u'当前报名数', default=0)
     is_active = models.BooleanField(u'有效性', default=True)
-    status = models.SmallIntegerField(u'班级状态', default=1, choices=((1, u'进行中'),(2, u'已结束'),))
+    status = models.SmallIntegerField(u'班级状态', default=1, choices=((1, u'进行中'), (2, u'已结束'),))
     qq = models.CharField(u'班级QQ群', max_length=13)
     teacher = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='teacher',
                                 null=True, blank=True, verbose_name=u'班级老师')
@@ -526,8 +530,8 @@ class Class(models.Model):
     def __unicode__(self):
         return str(self.coding)
 
-class ClassStudents(models.Model):
 
+class ClassStudents(models.Model):
     '''
     班级和学生产生的关联对象
     '''
@@ -536,7 +540,7 @@ class ClassStudents(models.Model):
     student_class = models.ForeignKey(Class, verbose_name=u'班级')
     study_point = models.IntegerField(u'学生在该班级下的学力', default=0)
     pause_reason = models.CharField(u'暂停原因', null=True, blank=True, max_length=200)
-    pause_datetime = models.DateTimeField(u'暂停时间',null=True, blank=True, default=None)
+    pause_datetime = models.DateTimeField(u'暂停时间', null=True, blank=True, default=None)
 
     class Meta:
         verbose_name = u'班级学生'
@@ -548,15 +552,15 @@ class ClassStudents(models.Model):
     def __unicode__(self):
         return str(self.id)
 
-class Discuss(models.Model):
 
+class Discuss(models.Model):
     '''
     章节讨论
     '''
 
     content = models.TextField(u'讨论内容')
     parent_id = models.IntegerField(u'父讨论ID', blank=True, null=True)
-    date_publish = models.DateTimeField(u'发布时间',auto_now_add = True)
+    date_publish = models.DateTimeField(u'发布时间', auto_now_add=True)
     lesson = models.ForeignKey(Lesson, verbose_name=u'章节')
     user = models.ForeignKey(settings.AUTH_USER_MODEL, verbose_name=u'用户')
     user_class = models.ForeignKey(Class, null=True, blank=True, verbose_name=u'班级')
@@ -569,8 +573,8 @@ class Discuss(models.Model):
     def __unicode__(self):
         return str(self.id)
 
-class UserPurchase(models.Model):
 
+class UserPurchase(models.Model):
     '''
     支付订单
     '''
@@ -583,9 +587,9 @@ class UserPurchase(models.Model):
                                                           (3, u'阶段款')), default=0)
     date_add = models.DateTimeField(u'下单时间', auto_now_add=True)
     date_pay = models.DateTimeField(u'支付时间', null=True, blank=True)
-    pay_way = models.SmallIntegerField(u'支付方式', choices=((1, u'网页支付宝'), (2, u'移动支付宝'),),)
+    pay_way = models.SmallIntegerField(u'支付方式', choices=((1, u'网页支付宝'), (2, u'移动支付宝'),), )
     pay_status = models.SmallIntegerField(u'支付状态', null=True, blank=True, default=0,
-                                          choices=((0, u'未支付'), (1, u'支付成功'),(2, u'支付失败'),),)
+                                          choices=((0, u'未支付'), (1, u'支付成功'), (2, u'支付失败'),), )
     pay_careercourse = models.ForeignKey(CareerCourse, verbose_name=u'支付订单对应职业课程')
     pay_class = models.ForeignKey(Class, verbose_name=u'支付订单对应班级号')
     pay_stage = models.ManyToManyField(Stage, verbose_name=u'支付订单对应阶段')

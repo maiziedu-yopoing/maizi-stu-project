@@ -9,6 +9,8 @@ common模块的url配置。
 
 from django.conf.urls import patterns, url
 
-urlpatterns = patterns('common.views',
+urlpatterns = patterns(
+    'common.views',
     url(r'^$', 'index', name='index'),
+    url(r'^get_recommend_keywords$', 'get_recommend_keywords', name='get_recommend_keywords'),
 )
