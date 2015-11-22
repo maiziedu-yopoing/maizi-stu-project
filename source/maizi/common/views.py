@@ -14,6 +14,7 @@ from django.db.models import Sum
 from utils import my_pagination
 import json
 from django.http import HttpResponse
+import math
 
 
 # 首页
@@ -38,6 +39,74 @@ def index(request):
     recommend_nw = RecommendedReading.objects.filter(reading_type=RecommendedReading.NEWS)
     recommend_dc = RecommendedReading.objects.filter(reading_type=RecommendedReading.DISCUSS)
     return render(request, "common/index.html", locals())
+
+
+def get_course_by_post(request):
+    result = {"error": ""}
+    pagesize = 10
+    course_by = request.POST.get("course_by", "")
+    try:
+        page = int(request.POST.get("page", 1))
+        if page <= 0:
+            page = 1
+    except:
+        page = 1
+    if course_by:
+        if course_by == "date_publish":
+            total_count = Course.objects.filter(is_homeshow=1).count()
+            total_pages = math.ceil(total_count / page)
+            if page > total_pages:
+                page = total_pages
+            start, end = get_page_start_and_end(page, pagesize)
+            course = Course.objects.filter(is_homeshow=1).order_by("-date_publish", "index")[start:end]
+            result["total_pages"] = total_pages
+            result["current_page"] = page
+            result["data"] = get_return_data(course, course_by)
+        elif course_by == "play_times":
+            total_count = Lesson.objects.all().values("course").annotate(total_play_count=Sum('play_count')).count()
+            total_pages = math.ceil(total_count / page)
+            if page > total_pages:
+                page = total_pages
+            start, end = get_page_start_and_end(page, pagesize)
+            course = Lesson.objects.all().values("course__name", "course__student_count", "course__image",
+                                                 "course__id").annotate(total_play_count=Sum('play_count')).order_by(
+                '-total_play_count')[start:end]
+            result["total_pages"] = total_pages
+            result["current_page"] = page
+            result["data"] = get_return_data(course, course_by)
+        elif course_by == "hot":
+            total_count = Course.objects.filter(is_homeshow=1).count()
+            total_pages = math.ceil(total_count / page)
+            if page > total_pages:
+                page = total_pages
+            start, end = get_page_start_and_end(page, pagesize)
+            course = Course.objects.filter(is_homeshow=1).order_by("-favorite_count", "index")[start:end]
+            result["total_pages"] = total_pages
+            result["current_page"] = page
+            result["data"] = get_return_data(course, course_by)
+        else:
+            result["error"] = "参数错误"
+    else:
+        result["error"] = "找不到传递的参数"
+    print(result)
+    return HttpResponse(json.dumps(result), content_type="application/json")
+
+
+def get_page_start_and_end(page, pagesize):
+    start = (page - 1) * pagesize
+    end = page * pagesize
+    return start, end
+
+
+def get_return_data(course, course_by):
+    data = []
+    if course_by == "play_times":
+        for cc in course:
+            data.append((cc.course__name, cc.course__student_count, cc.course__image, cc.course__id))
+    else:
+        for cc in course:
+            data.append((cc.name, cc.student_count, cc.image, cc.id))
+    return data
 
 
 def get_recommend_keywords(request):

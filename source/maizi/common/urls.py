@@ -13,4 +13,5 @@ urlpatterns = patterns(
     'common.views',
     url(r'^$', 'index', name='index'),
     url(r'^get_recommend_keywords$', 'get_recommend_keywords', name='get_recommend_keywords'),
+    url(r'^get_course_by_post', 'get_course_by_post', name='get_course_by_post'),
 )

@@ -322,3 +322,28 @@
         </div>
     </div>
 {% endblock %}
+{% block custom_script %}
+    <script type="application/javascript">
+        function get_lastest_course() {
+            var course_list = $("#new .course-list-index");
+            course_list.empty();
+            $.ajax({
+                url: '{% url "common:get_course_by_post" %}',
+                type: 'POST',
+                data: {
+                    'course_by':'date_publish',
+                    'page':'',
+                    'csrfmiddlewaretoken': '{{ csrf_token }}'
+                },
+                dataType: "json",
+                error: function (xhr) {
+                },
+                success: function (response) {
+                    $.each(response, function (index, data) {
+                        hotkeyword.append('<li><a href="">' + data.name + '</a></li>');
+                    });
+                }
+            });
+        }
+    </script>
+{% endblock %}
