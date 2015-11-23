@@ -216,7 +216,7 @@ function get_course_by_keyword() {
             if ("course" in response && response["course"].length > 0) {
                 course.html("");
                 $.each(response["course"], function (index, data) {
-                        course.append('<a href="#课程' + data["id"] + '" style="background-color:#A8C310">' + data["name"] + '</a>');
+                        course.append('<a href="#课程' + data["id"] + '" style="background-color:' + data["course_color"] + '">' + data["name"] + '</a>');
                     }
                 );
             }
