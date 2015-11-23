@@ -8,7 +8,8 @@ Common模块View业务处理。
 """
 
 from django.shortcuts import render
-from common.models import Links, RecommendedReading, UserProfile, Ad, Course, Lesson, RecommendKeywords, CareerCourse
+from common.models import Links, RecommendedReading, UserProfile, Ad, Course, Lesson, RecommendKeywords, CareerCourse, \
+    MyCourse
 from django.conf import settings
 from django.db.models import Sum
 from utils import my_pagination
@@ -131,5 +132,14 @@ def search_course(request):
         data["career_course"].append({'name': i.name, 'course_color': i.course_color, 'id': i.id})
     data["course"] = []
     for i in course:
-        data["course"].append({'name': i.name, 'id': i.id})
+        data["course"].append({'name': i.name, 'course_color': i.course_color, 'id': i.id})
     return HttpResponse(json.dumps(data), content_type="application/json")
+
+
+def teacher_course(request, teacher_id):
+    if teacher_id:
+        media_url = settings.MEDIA_URL
+        teacher = UserProfile.objects.get(pk=teacher_id)
+        course = Course.objects.filter(teacher=teacher)
+        my_course = MyCourse.objects.filter(user=request.user)
+        return render(request, "common/teacher_course.html", locals())

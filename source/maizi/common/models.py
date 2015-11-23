@@ -181,7 +181,7 @@ class CareerCourse(models.Model):
     description = models.TextField(u'文字介绍')
     student_count = models.IntegerField(u'学习人数', default=0)
     market_page_url = models.URLField(u'营销页面地址', blank=True, null=True)
-    course_color = models.CharField(u'课程配色', max_length=50)
+    course_color = models.CharField(u'课程配色', max_length=50, default="#50cd8e")
     discount = models.DecimalField(u'折扣', default=1, max_digits=3, decimal_places=2)
     click_count = models.IntegerField(u'点击次数', default=0)
     index = models.IntegerField(u'职业课程顺序(从小到大)', default=999)
@@ -245,6 +245,7 @@ class Course(models.Model):
     search_keywords = models.ManyToManyField(Keywords, verbose_name=u'小课程搜索关键词')
     is_homeshow = models.BooleanField(u'是否在首页显示', default=False)
     is_required = models.BooleanField(u'是否必修', default=True)
+    course_color = models.CharField(u'课程配色', max_length=50, default="#429FDA")
 
     class Meta:
         verbose_name = '课程'
