@@ -38,7 +38,7 @@
                                 <ul class="row course-list-index">
                                     {% for course in course_lastest %}
                                         <li class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
-                                            <a href="">
+                                            <a href="#{{ course.id }}">
                                                 <dl>
                                                     <dt>
                                                     <div><img src="{{ media_url }}{{ course.image }}"></div>
@@ -85,7 +85,7 @@
                                 <ul class="row course-list-index">
                                     {% for course in course_most_play %}
                                         <li class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
-                                            <a href="">
+                                            <a href="#{{ course.course__id }}">
                                                 <dl>
                                                     <dt>
                                                     <div><img src="{{ media_url }}{{ course.course__image }}"></div>
@@ -132,7 +132,7 @@
                                 <ul class="row course-list-index">
                                     {% for course in course_hot %}
                                         <li class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
-                                            <a href="">
+                                            <a href="#{{ course.id }}">
                                                 <dl>
                                                     <dt>
                                                     <div><img src="{{ media_url }}{{ course.image }}"></div>
@@ -192,8 +192,12 @@
                         {% for t in teachers %}
                             <li>
                                 <dl>
-                                    <dt><a href="" style="border-left-color:#00A388;"><img
-                                            src="{% static 'test/2.png' %}"></a>
+                                    <dt><a href="{% url 'common:teacher_course' t.id %} "
+                                           style="border-left-color:#00A388;">
+                                        {% if t.avatar_middle_thumbnall %}
+                                            <img src="{{ media_url }}{{ t.avatar_middle_thumbnall }}">
+                                        {% endif %}
+                                    </a>
                                     </dt>
                                     <dd>
                                         <h2>{{ t.last_name }}{{ t.first_name }}</h2>
@@ -331,8 +335,8 @@
                 url: '{% url "common:get_course_by_post" %}',
                 type: 'POST',
                 data: {
-                    'course_by':'date_publish',
-                    'page':'',
+                    'course_by': 'date_publish',
+                    'page': '',
                     'csrfmiddlewaretoken': '{{ csrf_token }}'
                 },
                 dataType: "json",

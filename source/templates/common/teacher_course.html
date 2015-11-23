@@ -1,0 +1,45 @@
+{% extends "common/base.html" %}
+{% load staticfiles %}
+{% block title %}他的课程-老师{% endblock %}
+{% block keywords %}课程{% endblock %}
+{% block description %}老师的课程{% endblock %}
+{% block header %}
+    <header class="navbar navbar-default navbar-fixed-top navbar-v5" data-spy="affix" data-offset-top="64">
+{% endblock %}
+{% block container %}
+    <div class="container-fluid container-banner container-banner-a">
+        <div class="container container-uinfo">
+            <div class="header-uinfo">
+                <div class="uinfo-head"><img src="{{ media_url }}{{ teacher.avatar_middle_thumbnall }}"></div>
+                <div class="uinfo-con">
+                    <p>{{ teacher.last_name }}{{ teacher.first_name }}</p>
+
+                    <p>{{ teacher.position }}</p>
+
+                    <p>简介：{{ teacher.description }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container uc-boxb">
+        <div class="uc-h1">他的课程</div>
+        <ul class="row my-course">
+            {% for cc in course %}
+                <li class="col-xs-12 col-sm-6 col-md-6 col-lg-4">
+                    <section style="background-color:{{ cc.course_color }};">
+                        <a href="">
+                            <img src="{{ media_url }}{{ cc.image }}">
+                            <article>
+                                <h3>{{ cc.name }}</h3>
+                                {% if cc in my_course %}
+                                    <p>班级排名（model里没有定义排名）：1/1</p>
+                                {% endif %}
+                            </article>
+                        </a>
+                        <a href="#{{ cc.id }}" class="opt">查看</a>
+                    </section>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+{% endblock %}
