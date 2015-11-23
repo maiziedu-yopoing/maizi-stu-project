@@ -43,10 +43,10 @@
                 <li><a href="">论坛</a></li>
                 <li><a href="">移动APP</a></li>
             </ul>
-            <form class="navbar-form navbar-left" role="search">
+            <form class="navbar-form navbar-left" role="search" onsubmit="return false">
                 <div class="form-group">
                     <i class="v5-icon v5-icon-search"></i>
-                    <input type="text" class="form-control" id="search" placeholder="搜索你感兴趣的课程">
+                    <input type="text" class="form-control" id="search" placeholder="搜索你感兴趣的课程" autocomplete="off">
                 </div>
                 <div class="search-dp" id="hotkeyword">
                     <!--推荐关键词-->
@@ -61,6 +61,7 @@
                             <li><a href="">Android</a></li>
                             <li><a href="">WP</a></li>
                             <li><a href="">Android</a></li>
+                            <li><a href="">北冥神功</a></li>
                         </ul>
                     </div>
                 </div>
@@ -85,7 +86,7 @@
             <div class="keyword-group scroll-pane">
                 <dl>
                     <dt>职业课程</dt>
-                    <dd class="cf">
+                    <dd class="cf career_course">
                         <a href="" style="background-color:#A8C310;">Android应用开发工程</a>
                         <a href="" style="background-color:#5184CF;">Android架构设计师</a>
                         <a href="" style="background-color:#5DB836;">Android的层嵌入式工</a>
@@ -93,7 +94,7 @@
                 </dl>
                 <dl>
                     <dt>其他课程</dt>
-                    <dd class="cf">
+                    <dd class="cf course">
                         <a href="" style="background-color:#A8C310;">Android应用开发工程</a>
                         <a href="" style="background-color:#5184CF;">Android架构设计师</a>
                         <a href="" style="background-color:#5DB836;">Android的层嵌入式工</a>
@@ -338,26 +339,6 @@
             autoReinitialise: true
         });
     });
-    get_keywords();
-    function get_keywords() {
-        var hotkeyword = $(".hotkeyword ul");
-{#        hotkeyword.empty();#}
-        $.ajax({
-            url: '{% url "common:get_recommend_keywords" %}',
-            type: 'POST',
-            data: {
-                'csrfmiddlewaretoken': '{{ csrf_token }}'
-            },
-            dataType: "json",
-            error: function (xhr) {
-            },
-            success: function (response) {
-                $.each(response, function (index, data) {
-                    hotkeyword.append('<li><a href="">' + data.name + '</a></li>');
-                });
-            }
-        });
-    }
 </script>
 {% block custom_script %}{% endblock %}
 {% block popup %}{% endblock %}
