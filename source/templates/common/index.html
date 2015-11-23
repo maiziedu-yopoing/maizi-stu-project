@@ -36,45 +36,14 @@
                         <div class="v5-course-item tab-pane fade in active" id="new" data-holder="holdernew">
                             <div class="page-item">
                                 <ul class="row course-list-index">
-                                    {% for course in course_lastest %}
-                                        <li class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
-                                            <a href="#{{ course.id }}">
-                                                <dl>
-                                                    <dt>
-                                                    <div><img src="{{ media_url }}{{ course.image }}"></div>
-                                                    </dt>
-                                                    <dd>
-                                                        <span>{{ course.name }}</span>
 
-                                                        <p>{{ course.student_count }}人正在学习</p>
-                                                    </dd>
-                                                </dl>
-                                            </a>
-                                        </li>
-                                    {% endfor %}
                                 </ul>
                             </div>
                             <div class="page-bg-w">
                                 <div class="row v5-pages">
                                     <div class="col-sm-12 v5-pages-list">
                                         <ul class="row fr">
-                                            {% if course_lastest.has_previous %}
-                                                <li><a href="?pgl={{ course_lastest.previous_page_number }}"
-                                                       class="v5-icon v5-icon-prev"></a></li>
-                                            {% endif %}
 
-                                            {% for p in paginator_lastest %}
-                                                {% ifequal p course_lastest.number %}
-                                                    <li><a href="?pgl={{ p }}" class="page-num active">{{ p }}</a></li>
-                                                {% else %}
-                                                    <li><a href="?pgl={{ p }}" class="page-num">{{ p }}</a></li>
-                                                {% endifequal %}
-                                            {% endfor %}
-
-                                            {% if course_lastest.has_next %}
-                                                <li><a href="?pgl={{ course_lastest.next_page_number }}"
-                                                       class="v5-icon v5-icon-next"></a></li>
-                                            {% endif %}
                                         </ul>
                                     </div>
                                 </div>
@@ -83,45 +52,12 @@
                         <div class="v5-course-item tab-pane fade" id="most" data-holder="holdermost">
                             <div class="page-item">
                                 <ul class="row course-list-index">
-                                    {% for course in course_most_play %}
-                                        <li class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
-                                            <a href="#{{ course.course__id }}">
-                                                <dl>
-                                                    <dt>
-                                                    <div><img src="{{ media_url }}{{ course.course__image }}"></div>
-                                                    </dt>
-                                                    <dd>
-                                                        <span>{{ course.course__name }}</span>
-
-                                                        <p>{{ course.course__student_count }}人正在学习</p>
-                                                    </dd>
-                                                </dl>
-                                            </a>
-                                        </li>
-                                    {% endfor %}
                                 </ul>
                             </div>
                             <div class="page-bg-w">
                                 <div class="row v5-pages">
                                     <div class="col-sm-12 v5-pages-list">
                                         <ul class="row fr">
-                                            {% if course_most_play.has_previous %}
-                                                <li><a href="?pgm={{ course_most_play.previous_page_number }}"
-                                                       class="v5-icon v5-icon-prev"></a></li>
-                                            {% endif %}
-
-                                            {% for p in paginator_most_play %}
-                                                {% ifequal p course_most_play.number %}
-                                                    <li><a href="?pgm={{ p }}" class="page-num active">{{ p }}</a></li>
-                                                {% else %}
-                                                    <li><a href="?pgm={{ p }}" class="page-num">{{ p }}</a></li>
-                                                {% endifequal %}
-                                            {% endfor %}
-
-                                            {% if course_most_play.has_next %}
-                                                <li><a href="?pgm={{ course_most_play.next_page_number }}"
-                                                       class="v5-icon v5-icon-next"></a></li>
-                                            {% endif %}
                                         </ul>
                                     </div>
                                 </div>
@@ -130,45 +66,12 @@
                         <div class="v5-course-item tab-pane fade" id="hot" data-holder="holderhot">
                             <div class="page-item">
                                 <ul class="row course-list-index">
-                                    {% for course in course_hot %}
-                                        <li class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
-                                            <a href="#{{ course.id }}">
-                                                <dl>
-                                                    <dt>
-                                                    <div><img src="{{ media_url }}{{ course.image }}"></div>
-                                                    </dt>
-                                                    <dd>
-                                                        <span>{{ course.name }}</span>
-
-                                                        <p>{{ course.student_count }}人正在学习</p>
-                                                    </dd>
-                                                </dl>
-                                            </a>
-                                        </li>
-                                    {% endfor %}
                                 </ul>
                             </div>
                             <div class="page-bg-w">
                                 <div class="row v5-pages">
                                     <div class="col-sm-12 v5-pages-list">
                                         <ul class="row fr">
-                                            {% if course_hot.has_previous %}
-                                                <li><a href="?pgh={{ course_hot.previous_page_number }}"
-                                                       class="v5-icon v5-icon-prev"></a></li>
-                                            {% endif %}
-
-                                            {% for p in paginator_hot %}
-                                                {% ifequal p course_hot.number %}
-                                                    <li><a href="?pgh={{ p }}" class="page-num active">{{ p }}</a></li>
-                                                {% else %}
-                                                    <li><a href="?pgh={{ p }}" class="page-num">{{ p }}</a></li>
-                                                {% endifequal %}
-                                            {% endfor %}
-
-                                            {% if course_hot.has_next %}
-                                                <li><a href="?pgh={{ course_hot.next_page_number }}"
-                                                       class="v5-icon v5-icon-next"></a></li>
-                                            {% endif %}
                                         </ul>
                                     </div>
                                 </div>
@@ -328,24 +231,64 @@
 {% endblock %}
 {% block custom_script %}
     <script type="application/javascript">
-        function get_lastest_course() {
-            var course_list = $("#new .course-list-index");
+        get_lastest_course(1, "date_publish", "new");
+        get_lastest_course(1, "play_times", "most");
+        get_lastest_course(1, "hot", "hot");
+
+        function get_lastest_course(index, course_by, container) {
+            var course_list = $("#" + container + " .course-list-index");
+            var page_list = $("#" + container + " .fr");
             course_list.empty();
             $.ajax({
                 url: '{% url "common:get_course_by_post" %}',
-                type: 'POST',
+                async: false,
                 data: {
-                    'course_by': 'date_publish',
-                    'page': '',
-                    'csrfmiddlewaretoken': '{{ csrf_token }}'
+                    'course_by': course_by,
+                    'page': index
                 },
                 dataType: "json",
                 error: function (xhr) {
+                    course_list.html("获取课程出错");
+                    page_list.html("");
                 },
                 success: function (response) {
-                    $.each(response, function (index, data) {
-                        hotkeyword.append('<li><a href="">' + data.name + '</a></li>');
-                    });
+                    if ("error" in response && response["error"].length > 0) {
+                        course_list.html(response["error"]);
+                        page_list.html("");
+                    }
+                    else {
+                        course_list.html("");
+                        $.each(response["data"], function (index, data) {
+                            var li = '<li class="col-xs-12 col-sm-6 col-md-6 col-lg-3"><a href="#' + data[3] + '">' +
+                                    '<dl><dt><div><img src="{{ media_url }}' + data[2] + '"></div>' +
+                                    '</dt> <dd><span>' + data[0] + '</span><p>' + data[1] + '人正在学习</p>' +
+                                    '</dd> </dl> </a></li>'
+                            course_list.append(li);
+                        });
+                        page_list.html("");
+                        if (response["current_page"] > 1) {
+                            page_list.append('<li><a href="javascript:void(0);" class="v5-icon v5-icon-prev" ' +
+                                    'onclick="get_lastest_course(' + (response["current_page"] - 1) +
+                                    ',\'' + course_by + '\',\'' + container + '\');"></a></li>');
+                        }
+                        for (var i = 0; i < response["total_pages"]; i++) {
+                            if (response["current_page"] == i + 1) {
+                                page_list.append('<li><a href="javascript:void(0);" class="page-num active" ' +
+                                        'onclick=get_lastest_course(' + (i + 1) +
+                                        ',\'' + course_by + '\',\'' + container + '\');>' + (i + 1) + '</a></li>');
+                            }
+                            else {
+                                page_list.append('<li><a href="javascript:void(0);" class="page-num" ' +
+                                        'onclick="get_lastest_course(' + (i + 1) +
+                                        ',\'' + course_by + '\',\'' + container + '\');">' + (i + 1) + '</a></li>');
+                            }
+                        }
+                        if (response["current_page"] != response["total_pages"]) {
+                            page_list.append('<li><a href="javascript:void(0);" class="v5-icon v5-icon-next" ' +
+                                    'onclick="get_lastest_course(' + (response["current_page"] + 1) +
+                                    ',\'' + course_by + '\',\'' + container + '\');"></a></li>');
+                        }
+                    }
                 }
             });
         }
