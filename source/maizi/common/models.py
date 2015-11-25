@@ -229,6 +229,7 @@ class Course(models.Model):
 
     name = models.CharField(u'课程名称', max_length=50)
     image = models.ImageField(u'课程封面', upload_to='course/%Y/%m')
+    image2 = models.ImageField(u'课程小图', upload_to='course/%Y/%m', null=True)
     description = models.TextField(u'课程描述')
     is_active = models.BooleanField(u'有效性', default=True)
     date_publish = models.DateTimeField(u'发布时间', auto_now_add=True)

@@ -66,7 +66,6 @@ def get_course_by_post(request):
         elif course_by == "play_times":
             total_count = Lesson.objects.all().values("course").annotate(total_play_count=Sum('play_count')).count()
             total_pages = math.ceil(float(total_count) / pagesize)
-            print(total_count, pagesize, total_pages, '**************************')
             if page > total_pages:
                 page = total_pages
             start, end = get_page_start_and_end(page, pagesize)
@@ -141,5 +140,9 @@ def teacher_course(request, teacher_id):
         media_url = settings.MEDIA_URL
         teacher = UserProfile.objects.get(pk=teacher_id)
         course = Course.objects.filter(teacher=teacher)
-        my_course = MyCourse.objects.filter(user=request.user)
+        if request.user.id:
+            my_course = MyCourse.objects.filter(user=request.user)
+            my_courses = []
+            for c in my_course:
+                my_courses.append(c.id)
         return render(request, "common/teacher_course.html", locals())
