@@ -231,17 +231,17 @@
 {% endblock %}
 {% block custom_script %}
     <script type="application/javascript">
-        get_lastest_course(1, "date_publish", "new");
-        get_lastest_course(1, "play_times", "most");
-        get_lastest_course(1, "hot", "hot");
+        get_lastest_course(1, "date_publish", "new", false);
+        get_lastest_course(1, "play_times", "most", false);
+        get_lastest_course(1, "hot", "hot", false);
 
-        function get_lastest_course(index, course_by, container) {
+        function get_lastest_course(index, course_by, container, is_async) {
             var course_list = $("#" + container + " .course-list-index");
             var page_list = $("#" + container + " .fr");
             course_list.empty();
             $.ajax({
                 url: '{% url "common:get_course_by_post" %}',
-                async: false,
+                async: is_async,
                 data: {
                     'course_by': course_by,
                     'page': index
@@ -269,24 +269,24 @@
                         if (response["current_page"] > 1) {
                             page_list.append('<li><a href="javascript:void(0);" class="v5-icon v5-icon-prev" ' +
                                     'onclick="get_lastest_course(' + (response["current_page"] - 1) +
-                                    ',\'' + course_by + '\',\'' + container + '\');"></a></li>');
+                                    ',\'' + course_by + '\',\'' + container + '\',true);"></a></li>');
                         }
                         for (var i = 0; i < response["total_pages"]; i++) {
                             if (response["current_page"] == i + 1) {
                                 page_list.append('<li><a href="javascript:void(0);" class="page-num active" ' +
                                         'onclick=get_lastest_course(' + (i + 1) +
-                                        ',\'' + course_by + '\',\'' + container + '\');>' + (i + 1) + '</a></li>');
+                                        ',\'' + course_by + '\',\'' + container + '\',true);>' + (i + 1) + '</a></li>');
                             }
                             else {
                                 page_list.append('<li><a href="javascript:void(0);" class="page-num" ' +
                                         'onclick="get_lastest_course(' + (i + 1) +
-                                        ',\'' + course_by + '\',\'' + container + '\');">' + (i + 1) + '</a></li>');
+                                        ',\'' + course_by + '\',\'' + container + '\',true);">' + (i + 1) + '</a></li>');
                             }
                         }
                         if (response["current_page"] != response["total_pages"]) {
                             page_list.append('<li><a href="javascript:void(0);" class="v5-icon v5-icon-next" ' +
                                     'onclick="get_lastest_course(' + (response["current_page"] + 1) +
-                                    ',\'' + course_by + '\',\'' + container + '\');"></a></li>');
+                                    ',\'' + course_by + '\',\'' + container + '\',true);"></a></li>');
                         }
                     }
                 }

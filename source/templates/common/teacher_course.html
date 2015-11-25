@@ -28,10 +28,14 @@
                 <li class="col-xs-12 col-sm-6 col-md-6 col-lg-4">
                     <section style="background-color:{{ cc.course_color }};">
                         <a href="">
-                            <img src="{{ media_url }}{{ cc.image }}">
+                            {% if cc.image2 %}
+                                <img src="{{ media_url }}{{ cc.image2 }}">
+                            {% else %}
+                                <img src="{% static 'images/course/ios.png' %}">
+                            {% endif %}
                             <article>
                                 <h3>{{ cc.name }}</h3>
-                                {% if cc in my_course %}
+                                {% if cc.id in my_courses %}
                                     <p>班级排名（model里没有定义排名）：1/1</p>
                                 {% endif %}
                             </article>
