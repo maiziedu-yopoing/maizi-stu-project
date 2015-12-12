@@ -19,6 +19,9 @@ import sys
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_URL = '/media/'
+
 # app path settings
 sys.path.insert(0, os.path.join(BASE_DIR, 'maizi'))
 
@@ -87,8 +90,8 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'maizidb',
-        'USER': 'root',
-        'PASSWORD': '1234',
+        'USER': 'maizi',
+        'PASSWORD': 'maizi',
         'HOST': 'localhost',
         'PORT': '3306',
     }
@@ -115,11 +118,11 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 STATICFILES_DIRS = (
-    os.path.join(BASE_DIR,  'static'),
+    os.path.join(BASE_DIR, 'static'),
 )
 
 TEMPLATE_DIRS = (
-    os.path.join(BASE_DIR,  'templates'),
+    os.path.join(BASE_DIR, 'templates'),
 )
 
 # define

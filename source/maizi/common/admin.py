@@ -13,6 +13,7 @@ from django.utils.text import capfirst
 from django.utils.datastructures import OrderedDict
 from common.models import *
 
+
 # 让admin添加model时按照注册的先后顺序添加
 def find_model_index(name):
     count = 0
@@ -23,13 +24,16 @@ def find_model_index(name):
             count += 1
     return count
 
+
 def index_decorator(func):
     def inner(*args, **kwargs):
         templateresponse = func(*args, **kwargs)
         for app in templateresponse.context_data['app_list']:
             app['models'].sort(key=lambda x: find_model_index(x['name']))
         return templateresponse
+
     return inner
+
 
 registry = OrderedDict()
 registry.update(admin.site._registry)
@@ -37,13 +41,14 @@ admin.site._registry = registry
 admin.site.index = index_decorator(admin.site.index)
 admin.site.app_index = index_decorator(admin.site.app_index)
 
+
 # 用户管理类
 class UserProfileAdmin(UserAdmin):
     fieldsets = (
         (None, {'fields': ('username', 'password')}),
         ('Personal info', {'fields': ('first_name', 'last_name', 'email')}),
         ('Permissions', {'fields': ('is_active', 'is_staff', 'is_superuser',
-                                       'groups', 'user_permissions')}),
+                                    'groups', 'user_permissions')}),
         ('Important dates', {'fields': ('last_login',)}),
     )
     add_fieldsets = (
@@ -58,21 +63,26 @@ class UserProfileAdmin(UserAdmin):
     ordering = ('username',)
     filter_horizontal = ('groups', 'user_permissions',)
 
+
 # 章节资源管理类
 class LessonResourceInline(admin.TabularInline):
     model = LessonResource
+
 
 # 章节管理类
 class LessonAdmin(admin.ModelAdmin):
     inlines = [LessonResourceInline, ]
 
+
 # 课程资源管理类
 class CourseResourceInline(admin.TabularInline):
     model = CourseResource
 
+
 # 课程管理类
 class CourseAdmin(admin.ModelAdmin):
     inlines = [CourseResourceInline, ]
+
 
 # 向admin注册Model
 admin.site.register(UserProfile, UserProfileAdmin)
