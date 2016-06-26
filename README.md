@@ -3,7 +3,7 @@
 
 2、大家需要在dev分支下面建立各自的分支，需要提交时合并到dev分支再提交；
 
-3、开发环境统一用virtualenv搭建，具体需要安装模块参考requirement.txt，可切换到虚拟环境目录，使用命令pip install -r requirement.txt快速安装相应模块；Study目录下会有相关的安装说明文档。
+3、开发环境统一用virtualenv搭建，具体需要安装模块参考requirement.txt，可切换到虚拟环境目录，使用命令pip install -r requirement.txt快速安装相应模块；Study目录下和右侧的Wiki会有相关的帮助文档。
 
 4、代码说明：
 
