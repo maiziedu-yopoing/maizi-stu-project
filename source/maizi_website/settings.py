@@ -88,7 +88,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'maizidb',
         'USER': 'root',
-        'PASSWORD': '1234',
+        'PASSWORD': 'qwe978897..',
         'HOST': 'localhost',
         'PORT': '3306',
     }
@@ -121,6 +121,10 @@ STATICFILES_DIRS = (
 TEMPLATE_DIRS = (
     os.path.join(BASE_DIR,  'templates'),
 )
+
+MEDIA_URL = '/uploads/'
+
+MEDIA_ROOT = os.path.join(BASE_DIR,  'uploads')
 
 # define
 AUTH_USER_MODEL = "common.UserProfile"

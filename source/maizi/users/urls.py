@@ -7,7 +7,7 @@ Created on 2015/11/3
 users模块的url配置。
 """
 
-from django.conf.urls import patterns
+from django.conf.urls import url
 
-urlpatterns = patterns('users.views',
-)
+urlpatterns = []
+pass

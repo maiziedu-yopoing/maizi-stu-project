@@ -1,0 +1,125 @@
+{#广告banner备份#}
+{% for ad in ad_list %}
+<div class="carousel-feature">
+    <a href="{{ ad.callback_url }}"><img class="carousel-image" alt="Image Caption"
+                                         src="uploads/{{ ad.image_url }}"></a>
+</div>
+
+
+{#footer模块备份#}
+{% block footer %}
+    <div class="v5-footer">
+        <div class="container">
+            <div class="v5-footer-container">
+                <div class="v5-footer-links cf">
+                    <dl class="f-link">
+                        <dt>友情链接</dt>
+                        <dd>
+                            <ul>
+                                <li class="cf">
+                                    {% for link in link_list %}
+                                        <a href="{{ link.callback_url }}">{{ link.title }}</a><span>|</span>
+                                    {% endfor %}
+                                </li>
+
+                            </ul>
+                        </dd>
+                    </dl>
+                    <dl class="follow">
+                        <dt>关注我们</dt>
+                        <dd>
+                            <ul>
+                                <li><a href="http://weibo.com/microoh?is_hot=1"><span class="sina"></span>新浪微博</a></li>
+                                <li><a href="https://wx.qq.com/"><span class="weixin"></span>官方微信</a></li>
+                                <li><a href="http://t.qq.com/"><span class="qq"></span>腾讯微博</a></li>
+                            </ul>
+                        </dd>
+                    </dl>
+                    <dl class="webmap">
+                        <dt>网站导航</dt>
+                        <dd>
+                            <ul>
+                                <li><a href="/">网站首页</a></li>
+                                <li><a href="http://www.maiziedu.com/common/about/">关于我们</a></li>
+                                <li><a href="http://www.maiziedu.com/common/contact/">联系我们</a></li>
+                                <li><a href="http://www.maiziedu.com/common/apppage/">意见反馈</a></li>
+                            </ul>
+                        </dd>
+                    </dl>
+                </div>
+                <div class="v5-footer-bottom">
+                    <p>© 2012-2014 maiziedu.com | 服务条款 | 蜀ICP备13014270号-4 Version 4.0.1 release20140721.1</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+
+
+{#推荐阅读备份#}
+<div class="v5-titline">
+    <div class="container">
+        <h1>推荐阅读</h1>
+    </div>
+</div>
+<div class="container">
+    <div class="v5-read cf">
+        <div class="v5-read-item">
+            <div class="v5-read-list" style="background-color:#00A388;">
+                <h1>官方活动</h1>
+                <ul>
+                    {% for AV in AV_list %}
+                        <li><a href="{{ AV.url }}" title="{{ AV.title }}">{{ AV.title }}</a></li>
+                    {% endfor %}
+                </ul>
+            </div>
+            <p><img src="{% static 'test/3.jpg' %}"></p>
+        </div>
+        <div class="v5-read-item v5-read-item-mid">
+            <p><img src="{% static 'test/4.jpg' %}"></p>
+            <div class="v5-read-list" style="background-color:#FF6138;">
+                <h1>开发者咨询</h1>
+                <ul>
+                    {% for NW in NW_list %}
+                        <li><a href="{{ NW.url }}" title="{{ NW.title }}">{{ NW.title }}</a></li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+        <div class="v5-read-item">
+            <div class="v5-read-list" style="background-color:#00A388;">
+                <h1>技术交流</h1>
+                <ul>
+                    {% for DC in DC_list %}
+                        <li><a href="{{ DC.url }}" title="{{ DC.title }}">{{ DC.title }}</a></li>
+                    {% endfor %}
+                </ul>
+            </div>
+            <p><img src="{% static 'test/5.jpg' %}"></p>
+        </div>
+    </div>
+</div>
+<div class="v5-titline">
+    <div class="container">
+        <h1>战略合作</h1>
+    </div>
+</div>
+<div class="container">
+    <div class="v5-strategic">
+        <ul class="cf">
+            <li>
+                <a href="https://dribbble.com/psdbooster"><img src="{% static 'test/6.png' %}"></a>
+            </li>
+            <li>
+                <a href="http://www.zhihu.com/"><img src="{% static 'test/7.png' %}"></a>
+            </li>
+            <li>
+                <a href="https://en.wikipedia.org/wiki/Awaaz"><img src="{% static 'test/9.png' %}"></a>
+            </li>
+            <li>
+                <a href="http://www.calbar.ca.gov/Attorneys.aspx"><img src="{% static 'test/10.png' %}"></a>
+            </li>
+        </ul>
+    </div>
+</div>
