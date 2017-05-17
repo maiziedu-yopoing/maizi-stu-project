@@ -7,8 +7,15 @@ Created on 2015/11/3
 common模块的url配置。
 """
 
-from django.conf.urls import patterns, url
+from django.conf.urls import url,include
+from common import views
+from django.conf import settings
+import django.contrib.auth.views
 
-urlpatterns = patterns('common.views',
-    url(r'^$', 'index', name='index'),
-)
+urlpatterns = [
+    url(r'^$', views.index, name='index'),
+    url(r"^uploads/(?P<path>.*)$",
+        django.views.static.serve,
+        {"document_root": settings.MEDIA_ROOT,},
+    ),
+]

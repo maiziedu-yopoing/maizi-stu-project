@@ -33,7 +33,7 @@ class Ad(models.Model):
         ordering = ['index', 'id']
         db_table = 'ad'
 
-    def __unicode__(self):
+    def __str__(self):
         return self.title
 
 class MyMessage(models.Model):
@@ -63,7 +63,7 @@ class MyMessage(models.Model):
         verbose_name_plural = verbose_name
         db_table = 'my_message'
 
-    def __unicode__(self):
+    def __str__(self):
         return str(self.id)
 
 class Links(models.Model):
@@ -84,7 +84,7 @@ class Links(models.Model):
         verbose_name_plural = verbose_name
         db_table = 'links'
 
-    def __unicode__(self):
+    def __str__(self):
         return self.title
 
 class Keywords(models.Model):
@@ -100,7 +100,7 @@ class Keywords(models.Model):
         verbose_name_plural = verbose_name
         db_table = 'keywords'
 
-    def __unicode__(self):
+    def __str__(self):
         return self.name
 
 class RecommendKeywords(models.Model):
@@ -116,7 +116,7 @@ class RecommendKeywords(models.Model):
         verbose_name_plural = verbose_name
         db_table = 'recommend_keywords'
 
-    def __unicode__(self):
+    def __str__(self):
         return self.name
 
 class EmailVerifyRecord(models.Model):
@@ -137,7 +137,7 @@ class EmailVerifyRecord(models.Model):
         verbose_name_plural = verbose_name
         db_table = 'email_verify_record'
 
-    def __unicode__(self):
+    def __str__(self):
         return self.code
 
 class RecommendedReading(models.Model):
@@ -166,7 +166,7 @@ class RecommendedReading(models.Model):
         verbose_name_plural = verbose_name
         db_table = 'recommended_reading'
 
-    def __unicode__(self):
+    def __str__(self):
         return self.title
 
 class CareerCourse(models.Model):
@@ -196,7 +196,7 @@ class CareerCourse(models.Model):
         ordering = ['-id']
         db_table = 'career_course'
 
-    def __unicode__(self):
+    def __str__(self):
         return self.name
 
 class Stage(models.Model):
@@ -218,7 +218,7 @@ class Stage(models.Model):
         ordering = ['index', 'id']
         db_table = 'stage'
 
-    def __unicode__(self):
+    def __str__(self):
         return self.name
 
 class Course(models.Model):
@@ -251,7 +251,7 @@ class Course(models.Model):
         verbose_name_plural = verbose_name
         db_table = 'course'
 
-    def __unicode__(self):
+    def __str__(self):
         return self.name
 
 class Lesson(models.Model):
@@ -278,7 +278,7 @@ class Lesson(models.Model):
         ordering = ['index', 'id']
         db_table = 'lesson'
 
-    def __unicode__(self):
+    def __str__(self):
         return self.name
 
 class LessonResource(models.Model):
@@ -296,7 +296,7 @@ class LessonResource(models.Model):
         verbose_name_plural = verbose_name
         db_table = 'lesson_resource'
 
-    def __unicode__(self):
+    def __str__(self):
         return self.name
 
 class CourseResource(models.Model):
@@ -314,7 +314,7 @@ class CourseResource(models.Model):
         verbose_name_plural = verbose_name
         db_table = 'course_resource'
 
-    def __unicode__(self):
+    def __str__(self):
         return self.name
 
 class UserProfileManager(BaseUserManager):
@@ -416,7 +416,7 @@ class UserProfile(AbstractBaseUser,PermissionsMixin):
             return True
         return False
 
-    def __unicode__(self):
+    def __str__(self):
         return self.username
 
 class MyCourse(models.Model):
@@ -436,7 +436,7 @@ class MyCourse(models.Model):
         verbose_name_plural = verbose_name
         db_table = 'my_course'
 
-    def __unicode__(self):
+    def __str__(self):
         return str(self.id)
 
 
@@ -456,7 +456,7 @@ class MyFavorite(models.Model):
         unique_together = (('user', 'course'),)
         db_table = 'my_favorite'
 
-    def __unicode__(self):
+    def __str__(self):
         return str(self.id)
 
 class UserLearningLesson(models.Model):
@@ -476,7 +476,7 @@ class UserLearningLesson(models.Model):
         unique_together = (('user', 'lesson'),)
         db_table = 'user_learning_lesson'
 
-    def __unicode__(self):
+    def __str__(self):
         return str(self.id)
 
 class UserUnlockStage(models.Model):
@@ -495,7 +495,7 @@ class UserUnlockStage(models.Model):
         unique_together = (('user', 'stage'),)
         db_table = 'user_unlock_stage'
 
-    def __unicode__(self):
+    def __str__(self):
         return str(self.id)
 
 class Class(models.Model):
@@ -523,7 +523,7 @@ class Class(models.Model):
         verbose_name_plural = verbose_name
         db_table = 'class'
 
-    def __unicode__(self):
+    def __str__(self):
         return str(self.coding)
 
 class ClassStudents(models.Model):
@@ -545,7 +545,7 @@ class ClassStudents(models.Model):
         ordering = ['-study_point']
         db_table = 'class_students'
 
-    def __unicode__(self):
+    def __str__(self):
         return str(self.id)
 
 class Discuss(models.Model):
@@ -566,7 +566,7 @@ class Discuss(models.Model):
         verbose_name_plural = verbose_name
         db_table = 'discuss'
 
-    def __unicode__(self):
+    def __str__(self):
         return str(self.id)
 
 class UserPurchase(models.Model):
@@ -595,5 +595,5 @@ class UserPurchase(models.Model):
         verbose_name_plural = verbose_name
         db_table = 'user_purchase'
 
-    def __unicode__(self):
+    def __str__(self):
         return self.order_no
